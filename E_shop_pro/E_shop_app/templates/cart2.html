@@ -1,0 +1,155 @@
+{% extends 'index1.html' %}
+{% block content %}
+{% load static %}
+<div class="page-heading" id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="inner-content">
+                    <h2>Check Your Cart Products</h2>
+                    <span>Awesome &amp; Creative Fashion World</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+     <!-- Shopping Cart -->
+	<div class="shopping-cart section">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<!-- Shopping Summery -->
+					<table class="table shopping-summery">
+						<thead>
+							<tr class="main-hading">
+								<th>PRODUCT</th>
+								<th>NAME</th>
+								<th class="text-center">UNIT PRICE</th>
+								<th class="text-center">QUANTITY</th>
+								<th class="text-center">TOTAL</th> 
+								<th class="text-center">DELETE</th>
+							</tr>
+						</thead>
+						<tbody>
+                            {% for i in data %}
+							<tr>
+								<td class="image" data-title="No" ><img src="{{i.Gproductid.pimg.url}}" alt="#" class="col-sm-3 hidden-xs"></td>
+                                
+								<td class="product-des" data-title="Description">
+									<h4 class="nomargin"><b>{{i.Gproductid.pname}}</b></h4>
+									
+                                    <input type="hidden" class="pid" id="pid" value="{{i.id}}">
+								</td>
+								<td class="price" data-title="Price">                   
+									<input name="price" type="text" id="price" class="form-control text-center" value="{{i.Gproductid.price}}"></td>
+								
+								<td class="qty" data-title="Qty"><!-- Input Order -->
+									<div class="input-group">
+										<input value="{{i.quantity}}" class="quan" type="number"  min="1" max="20" name="quan" id="quan{{i.id}}">
+									
+									</div>
+									<!--/ End Input Order -->
+								</td>
+								<td class="total-amount" data-title="Total">
+									<input type="text" class="form-control text-center" name="total"  value="{{i.total}}" id="tot_amount" >
+								</td>
+								<td class="action" data-title="Remove"><a href="{% url 'Shop_delete_G' Gdid=i.id %}"><i class="fa fa-remove"></i></a></td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					<!--/ End Shopping Summery -->
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<!-- Total Amount -->
+					<div class="total-amount">
+						<div class="row">
+							<div class="col-lg-8 col-md-5 col-12">
+								<div class="left">
+									<div class="coupon">
+										<form action="#" target="_blank">
+											<input name="Coupon" placeholder="Enter Your Coupon">
+											<button class="btn">Apply</button>
+										</form>
+									</div>
+									<div class="checkbox">
+										<label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox"> Shipping (+10$)</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-7 col-12">
+								<div class="right">
+									<ul>
+                                        {% for i in data %}
+										<li>Cart Subtotal : <span>{{i.total}}</span></li>
+                                        {% endfor %}
+										<li>Shipping<span>Free</span></li>
+										<li>You Save<span>$20.00</span></li>
+										<li>
+                                            <a href="#">Total
+                                              <span>{{total.total__sum}}/-</span>
+                                            </a>
+                                          </li>
+									</ul>
+									<div class="button5">
+										<a href="{% url 'checkoutp' %}" class="btn" style="background-color: #13e4f3;
+                                        border: none;
+                                        color: white;
+                                        padding: 15px 32px;
+                                        text-align: center;
+                                        text-decoration: none;
+                                        display: inline-block;
+                                        font-size: 16px;
+                                        margin: 4px 2px;
+                                        cursor: pointer;">Checkout</a>
+										<a href="#" class="btn" style="background-color: #bff316;
+                                        border: none;
+                                        color: white;
+                                        padding: 15px 32px;
+                                        text-align: center;
+                                        text-decoration: none;
+                                        display: inline-block;
+                                        font-size: 16px;
+                                        margin: 4px 2px;
+                                        cursor: pointer;">Continue shopping</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--/ End Total Amount -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/ End Shopping Cart -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+		$(".quan").on('change',function() {
+		// Get the row containing the input
+		var row = $(this).closest('tr');
+		// var p = $('#price').val();
+		var pid = parseInt(row.find(".pid").val());    
+		var qty = parseInt(row.find(this).val());
+		var price = parseInt(row.find('#price').val());
+		// var total =  parseInt(qty)*parseInt(price);
+		location.reload(true);
+		//  $("#tot_amount").val(total);
+				$.ajax({
+						url: "{% url 'cart_update_G' %}",
+						method: 'post',
+						cache: false,
+						data: {
+							pid: pid,
+							qty: qty,
+							price: price,
+						}
+					});
+	
+		});
+	});  
+	</script>
+{% endblock %}

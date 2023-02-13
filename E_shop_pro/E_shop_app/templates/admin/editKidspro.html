@@ -1,0 +1,116 @@
+{% extends 'admin/index2admin.html' %}
+{% block content %}
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 p-r-0 title-margin-right">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>Hello, <span>Welcome Here</span></h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- /# column -->
+                <div class="col-lg-4 p-l-0 title-margin-left">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Form-Basic</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <!-- /# column -->
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-title">
+                            <h4>PRODUCTS KIDS Table</h4>
+                            
+                        </div>
+                        <div class="card-body">
+                            <div class="basic-form">
+                                {% for pr in product %}
+                                <form method="post"  action="{% url 'peditsc' pid=pr.id  %}" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                    
+                                    <div class="mb-3">
+                                        <label>Product Name</label>
+                                        <input type="text" name="pname"value="{{pr.pname}}" class="form-control" id="pname">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label>Category</label>
+                                        <select name="category" id="category">
+                                            <option value="{{pr.pname}}">{{pr.pname}}</option>
+                                        </select>
+                                    
+                                    <div class="mb-3">
+                                        <label >Product description</label>
+                                        <textarea name="pdescription" id="descripton1" class="form-control" value="{{pr.pdescription}}"  placeholder="Enter Product Description here ">{{pr.pdescription}}</textarea>
+                                    </div>
+                    
+                                    <div> 
+                                        <label>Price</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" value="{{pr.price}}"   name="price" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                        
+                                    </div>
+                                    <div>
+                                        <label>Discount</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">%</span>
+                                        <input type="number" value="{{pr.discount}}" name="discount" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label>Color</label>
+                                        <select name="color" value="{{pr.color}}" id="color">
+                                            <option value="Red">Red</option>
+                                            <option value="Yellow">Yellow</option>
+                                            <option value="Blue">Blue</option>
+                                            <option value="Brown">Brown</option>
+                                            <option value="Pink">Pink</option>
+                                            <option value="Black">Black</option>
+                                            <option value="Multi Color">Multi Color</option>
+                                            <option value="Difficult Colors">Difficult Colors</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label>Size</label>
+                                       
+                                        <select name="size" id="size">
+                                            <option value="XS">XS</option>
+                                            <option value="S">S</option>
+                                            <option value="M">M</option>
+                                            <option  value="L">L</option>
+                                            <option  value="XL">XL</option>
+                                            <option  value="XXL">XXL</option>
+                                            <option value="XXXL">XXXL</option>     
+                    
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label>Product Image</label>
+                                        <input type="file" class="form-control" id="file2" name="image_r" >
+                    
+                                    </div>
+                                    <center><button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="reset" class="btn btn-primary">Cancel</button></center>
+                                </form>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends 'admin/index2admin.html' %}
+{% block content %}
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 p-r-0 title-margin-right">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>Hello, <span>Welcome Here</span></h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- /# column -->
+                <div class="col-lg-4 p-l-0 title-margin-left">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Form-Basic</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <!-- /# column -->
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-title">
+                            <h4>PRODUCTS KIDS</h4>
+                            
+                        </div>
+                        <div class="card-body">
+                            <div class="basic-form">
+                                <form method="post"  action="{% url 'psart' %}"  enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                        <label >Product Name</label>
+                                        <input type="text" name="pname" class="form-control" id="pname" aria-describedby="emailHelp">
+                                        
+                                    </div>
+                                    <div class="mb-3">
+                                        <label >Category</label>
+                                        <select name="category" id="category">
+                                            {% for pr in product %}
+                                            <option value="{{pr.name}}">{{pr.name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                        
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label >Product description</label>
+                                        <textarea name="pdescription" id="descripton1" class="form-control"  placeholder="Enter Product Description here "></textarea>
+                                    </div>
+                    
+                                    
+                                    <div> 
+                                        <label for="exampleInputPrice" class="form-label">Price</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" name="price" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                        
+                                    </div>
+                                    <div>
+                                        <label>Discount</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">%</span>
+                                        <input type="number" name="discount" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label>Color</label>
+                                        <select name="color" id="color">
+                                            <option value="Red">Red</option>
+                                            <option value="Yellow">Yellow</option>
+                                            <option value="Blue">Blue</option>
+                                            <option value="Brown">Brown</option>
+                                            <option value="Pink">Pink</option>
+                                            <option value="Black">Black</option>
+                                            <option value="Multi Color">Multi Color</option>
+                                            <option value="Difficult Colors">Difficult Colors</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label >Size</label>
+                                        <select name="size" id="size">
+                                            <option >XS</option>
+                                            <option >S</option>
+                                            <option >M</option>
+                                            <option >L</option>
+                                            <option >XL</option>
+                                            <option >XXL</option>
+                                            <option >XXXL</option>  
+                    
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label>Product Image</label>
+                                        <input type="file" name="file2" class="form-control" id="file2">
+                                    </div>
+                                    <center><button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="reset" class="btn btn-primary">Cancel</button></center>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

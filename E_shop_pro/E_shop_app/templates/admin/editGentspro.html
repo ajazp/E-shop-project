@@ -1,0 +1,110 @@
+{% extends 'admin/index2admin.html' %}
+{% block content %}
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 p-r-0 title-margin-right">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>Hello, <span>Welcome Here</span></h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- /# column -->
+                <div class="col-lg-4 p-l-0 title-margin-left">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Form-Basic</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <!-- /# column -->
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-title">
+                            <h4>PRODUCTS GENTS Table</h4>     
+                        </div>
+                        <div class="card-body">
+                            <div class="basic-form">
+                                {% for i in data %}
+                                <form action="{% url 'gpupdate' gpid=i.id %}" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                        <label >Product Name</label>
+                                        <input type="text" class="form-control" name="pname" value="{{i.pname}}" id="pname">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Choose Brand</label>
+                                        <select class="form-select mb-3" id="brname" name="brname" value="{{i.bname}}">
+                                           <option value="{{i.brname}}">{{i.brname}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label>Product Description</label>
+                                        <textarea type="text" name="pdes" class="form-control" value="{{i.pdes}}" id="pdes">{{i.pdes}}</textarea>
+                                    </div>
+                                    <div>
+                                        <label >Price</label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" name="price" value="{{i.price}}" class="form-control" id="price" aria-label="Amount (to the nearest dollar)">
+                                            <span class="input-group-text">.00</span>
+                                        </div>
+                                        <div>
+                                            <label >Discount</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">%</span>
+                                                <input type="number" name="discount" value="{{i.discount}}" class="form-control" id="discount" aria-label="Amount (to the nearest dollar)">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label>Color</label>
+                                        <select class="form-select mb-3" value="{{i.color}}" id="color" name="color">
+                                            <option value="Red">Red</option>
+                                            <option value="Yellow">Yellow</option>
+                                            <option value="Blue">Blue</option>
+                                            <option value="Brown">Brown</option>
+                                            <option value="Pink">Pink</option>
+                                            <option value="Black">Black</option>
+                                            <option value="Multi Color">Multi Color</option>
+                                            <option value="Difficult Colors">Difficult Colors</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Size</label>
+                                        <select class="form-select mb-3" id="size" value="{{i.size}}" name="size">
+                                            <option value="XS">XS</option>
+                                            <option value="S">S</option>
+                                            <option value="M">M</option>
+                                            <option  value="L">L</option>
+                                            <option  value="XL">XL</option>
+                                            <option  value="XXL">XXL</option>
+                                            <option value="XXXL">XXXL</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label>Product Image</label>
+                                        <input type="file" name="pimg" class="form-control" id="pimg">
+                                    </div>
+                                    <br>
+                                    <center><button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="reset" class="btn btn-primary">Cancel</button></center>
+                                </form>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'admin/index2admin.html' %}
+{% block content %}
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 p-r-0 title-margin-right">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>Hello, <span>Welcome Here</span></h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- /# column -->
+                <div class="col-lg-4 p-l-0 title-margin-left">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Table-Basic</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <!-- /# column -->
+            </div>
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-title">
+                        <h2>Ladies Table </h2>
+                        
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col">Brand Name</th>
+                                        <th scope="col">Product Description</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Discount</th>
+                                        <th scope="col">Color</th>
+                                        <th scope="col">Size</th>
+                                        <th scope="col">Product Image</th>
+                                        <th scope="col">Edit/Delete</th>
+                                    </tr>
+                                </thead>
+                                {% for i in pdata %}
+                                <tr>
+                                  <td style="white-space:pre-wrap; word-wrap:break-word">{{i.product_name}}</td>
+                                  <td style="white-space:pre-wrap; word-wrap:break-word">{{i.categorie}}</td>
+                                  <td style="white-space:pre-wrap; word-wrap:break-word">{{i.product_description}}</td>
+                                  <td style="white-space:pre-wrap; word-wrap:break-word">${{i.price}}.00</td>
+                                  <td style="white-space:pre-wrap; word-wrap:break-word">{{i.discount}}%</td>
+                                  <td style="white-space:pre-wrap; word-wrap:break-word">{{i.color}}</td>
+                                  <td style="white-space:pre-wrap; word-wrap:break-word">{{i.size}}</td>
+                                  <td><img src="{{i.img.url}}" width="100px" height="100px"></td>
+                                  <td> <a href="{% url 'p_edit' pe_id=i.id %}"><button type="button" class="btn btn-success">Edit</button><br><br> <a href="{% url 'p_delete' dd=i.id %}"><button type="button" class="btn btn-danger">Delete</button></a></td></td>
+                                 </tr>
+                                {% endfor %}
+                            </table>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

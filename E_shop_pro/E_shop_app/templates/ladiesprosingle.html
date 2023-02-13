@@ -1,0 +1,90 @@
+{% extends 'index1.html' %}
+{% block content %}
+{% load static %}
+       <!-- ***** Main Banner Area Start ***** -->
+    <div class="page-heading" id="top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="inner-content">
+                        <h2>Single Product Ladies</h2>
+                        <span>Awesome &amp; Creative Fashion World</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
+
+
+    <!-- ***** Product Area Starts ***** -->
+    <section class="section" id="product">
+        <div class="container">
+            {% for i in data %}
+            <form method="post" action="{% url 'shop_cart_L' lpid=i.id %}">
+            {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-8">
+                    <div class="left-images">
+                        <img src="{{i.img.url}}" alt="#" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="right-content">
+                        <h3>{{i.product_name}}</h3>
+                        <p>
+                            ${{i.price}}<input type="hidden" value="{{i.price}}" id="price">
+                        </p>
+                        <ul class="stars">
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                        </ul>
+                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod kon tempor incididunt ut labore.</span>
+                        <div class="quote">
+                            <i class="fa fa-quote-left"></i><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiuski smod.</p>
+                        </div>
+                        <div class="quantity-content">
+                            <div class="left-content">
+                                <h6>No. of Orders</h6>
+                            </div>
+                            <div class="card_area">
+                                <div class="right-content">
+                                    <p>Quantity</p>
+                                    <div class="product_count d-inline-block">
+                                      <input class="product_count_item input-number" name="quan" type="number" value="1" min="0" max="10" id="quan">
+                                    </div>
+                                    <h4>Total $</h4>
+                                    <div class="total">
+                                        <input class="product_count_item input-number" name="total" disabled  value="{{i.price}}" type="text" id="total">
+                                        <input type="hidden" name="id" value="{{request.session.id}}">
+                                      </div>
+                                  </div>
+                                <div class="add_to_cart">
+                                  <input type="submit" class="btn btn-primary" value="Add to Cart">
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </form>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Product Area Ends ***** -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+       $("#quan").change(function(){
+           var quantity = $('#quan').val()
+           var price = $('#price').val()
+           var subtotal = quantity*price
+           $('#total').val(subtotal)
+          //  alert(subtotal)
+        });
+      });  
+    </script>
+    
+{% endblock %}
